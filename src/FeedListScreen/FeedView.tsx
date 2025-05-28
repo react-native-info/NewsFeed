@@ -13,6 +13,10 @@ const FeedView = (props: FeedViewProp) => {
     const [loadImageFailed, setLoadImageFailed] = useState(false);
     const navigation = useNavigation<any>();
 
+    if (feed.name.startsWith('A')) {
+        throw new Error('SWW, testing exception by Advanced React Native')
+    }
+    
     return (
         <Pressable
             onPress={() => {
