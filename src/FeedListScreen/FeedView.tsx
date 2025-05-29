@@ -3,6 +3,7 @@ import { Feed } from "./Feed";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import SourceView from "./SourceView";
 import { useNavigation } from "@react-navigation/native";
+import ErrorBoundary from "../ErrorBoundary";
 
 interface FeedViewProp {
     feed: Feed;
@@ -94,4 +95,8 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FeedView;
+const ReinforcedFeedView = (props: FeedViewProp) => (
+    <ErrorBoundary fallbackView={null}><FeedView {...props} /></ErrorBoundary>
+);
+
+export default ReinforcedFeedView;
