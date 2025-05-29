@@ -4,6 +4,8 @@ import parseRSS from "react-native-rss";
 import { FlatList } from "react-native";
 import { Feed } from "./Feed";
 import FeedView from "./FeedView";
+import ErrorBoundary from "../ErrorBoundary";
+import ErrorScreen from "../ErrorScreen";
 
 const FeedListScreen = () => {
   const [data, setData] = useState<Feed[]>([]);
@@ -41,4 +43,8 @@ const FeedListScreen = () => {
   );
 };
 
-export default FeedListScreen;
+const ReinforcedFeedListScreen = () => (
+  <ErrorBoundary fallbackView={<ErrorScreen />}><FeedListScreen /></ErrorBoundary>
+);
+
+export default ReinforcedFeedListScreen;
