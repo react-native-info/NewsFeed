@@ -6,13 +6,14 @@ import { Feed } from "./Feed";
 import FeedView from "./FeedView";
 import ErrorBoundary from "../ErrorBoundary";
 import ErrorScreen from "../ErrorScreen";
+import reinforcedFetch from "../reinforcedFetch";
 
 const FeedListScreen = () => {
   const [data, setData] = useState<Feed[]>([]);
 
   useEffect(() => {
     const allPromises = RSSList.map((rss) => {
-      return fetch(rss.file).then((rsp: Response) => {
+      return reinforcedFetch(rss.file).then((rsp: Response) => {
         return rsp.text();
       }).then((xml: string) => {
         return parseRSS(xml, rss);
