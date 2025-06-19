@@ -1,9 +1,11 @@
 import { useRoute } from "@react-navigation/native";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native"
+import useThemedColors from "./useThemedColors";
 
 const FeedScreen = () => {
     const route = useRoute<any>();
     const { feed } = route?.params ?? {};
+    const themedColors = useThemedColors();
 
     return (
         <FlatList
@@ -15,12 +17,16 @@ const FeedScreen = () => {
                             source={{ uri: feed?.imageUrl }}
                         /> : null
                     }
-                    <Text style={styles.title}>{feed.name}</Text>
+                    <Text style={[styles.title, { color: themedColors.text }]}>{feed.name}</Text>
                 </View>
             }
             data={feed.content}
             renderItem={({ item }) => (
-                <Text style={styles.body}>{item}</Text>
+                <Text
+                    style={[styles.body, { color: themedColors.text }]}
+                >
+                    {item}
+                </Text>
             )}
         />
     );
