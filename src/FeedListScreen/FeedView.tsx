@@ -4,6 +4,8 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import SourceView from "./SourceView";
 import { useNavigation } from "@react-navigation/native";
 import ErrorBoundary from "../ErrorBoundary";
+import useThemedColors from "../useThemedColors";
+
 
 interface FeedViewProp {
     feed: Feed;
@@ -13,18 +15,19 @@ const FeedView = (props: FeedViewProp) => {
     const { feed } = props;
     const [loadImageFailed, setLoadImageFailed] = useState(false);
     const navigation = useNavigation<any>();
+    const themedColors = useThemedColors();
 
     return (
         <Pressable
             onPress={() => {
                 navigation.navigate('Feed', { feed });
             }}
-            style={styles.FeedCard}>
+            style={[styles.FeedCard, { backgroundColor: themedColors.background }]}>
             <View style={styles.sectionTop}>
                 <Text
                     numberOfLines={3}
                     ellipsizeMode="tail"
-                    style={styles.sectionTitle}>
+                    style={[styles.sectionTitle, { color: themedColors.text }]}>
                     {feed.name}
                 </Text>
                 {feed.imageUrl && !loadImageFailed && (
@@ -46,7 +49,7 @@ const FeedView = (props: FeedViewProp) => {
                     style={styles.metaTitle} />
                 <Text
                     numberOfLines={1}
-                    style={styles.metaDate}>
+                    style={[styles.metaDate, { color: themedColors.textDim }]}>
                     {feed.displayTime}
                 </Text>
             </View>
@@ -58,7 +61,6 @@ const styles = StyleSheet.create({
     FeedCard: {
         paddingBottom: 23,
         paddingHorizontal: 15,
-        backgroundColor: 'white',
     },
     sectionTop: {
         flex: 1,

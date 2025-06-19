@@ -1,23 +1,28 @@
 import { Image, StyleSheet, Text, View, ViewStyle } from "react-native";
+import useThemedColors from "../useThemedColors";
 
 const SourceView = (
     { iconUri, title, style }:
         { iconUri: string, title: string, style: ViewStyle }
-) => (
-    <View style={[styles.container, style]}>
-        <Image
-            source={{
-                uri: iconUri,
-            }}
-            style={styles.icon}
-        />
-        <Text
-            numberOfLines={1}
-            style={styles.text}>
-            {title}
-        </Text>
-    </View>
-);
+) => {
+    const themedColors = useThemedColors();
+
+    return (
+        <View style={[styles.container, style]}>
+            <Image
+                source={{
+                    uri: iconUri,
+                }}
+                style={styles.icon}
+            />
+            <Text
+                numberOfLines={1}
+                style={[styles.text, { color: themedColors.textDim }]}>
+                {title}
+            </Text>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
