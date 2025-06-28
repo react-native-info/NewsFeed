@@ -4,7 +4,7 @@ import Icon from "@react-native-vector-icons/material-design-icons"
 import { useState } from "react";
 
 const searchBarWidth = Dimensions.get('window').width - 77;
-const searchBarHeight = 30;
+const searchBarHeight = 36;
 
 const SearchView = (
     { onSearchWordsChanged }: { onSearchWordsChanged?: (searchWord: string) => void }
